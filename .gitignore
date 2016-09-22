@@ -30,9 +30,6 @@ Debug/
 # PyDev specific (Python IDE for Eclipse)
 *.pydevproject
 
-# CDT-specific (C/C++ Development Tooling)
-.cproject
-
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 

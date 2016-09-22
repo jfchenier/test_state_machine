@@ -35,7 +35,10 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN Includes */
-
+#include <os.h>
+#include <lib_math.h>
+#include <lib_mem.h>
+#include "start_task.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -62,7 +65,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  OS_ERR err;
   /* USER CODE END 1 */
 
   /* MCU Configuration----------------------------------------------------------*/
@@ -77,7 +80,19 @@ int main(void)
   MX_GPIO_Init();
 
   /* USER CODE BEGIN 2 */
+  Mem_Init();                                                 /* Initialize Memory Managment Module                   */
 
+  Math_Init();                                                /* Initialize Mathematical Module                       */
+
+  CPU_IntDis();                                               /* Disable all Interrupts.                              */
+
+  CPU_Init();                                                 /* Initialize the uC/CPU services                       */
+
+  OSInit(&err);                                               /* Init uC/OS-III.                                      */
+
+  StartTask_Create();                                         /* Create Start task which will then create the others  */
+
+  OSStart(&err);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -87,10 +102,6 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-      HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-      HAL_Delay(500);
-      HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-      HAL_Delay(500);
 
   }
   /* USER CODE END 3 */

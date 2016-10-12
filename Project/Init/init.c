@@ -6,9 +6,6 @@
 #include "memstruct.h"
 #include "can_tx_task.h"
 #include "can_rx_task.h"
-#include "gc_tx_task.h"
-#include "gc_rx_task.h"
-#include "service_uart.h"
 
 extern const CANBUS_PARA CanCfg;
 extern const CANMSG_PARA CanMsg[];
@@ -29,15 +26,12 @@ void Init_Board(void)
 
 static void init_services(void)
 {
-    service_uart_init();
 }
 
 static void init_tasks(void)
 {
     can_tx_task_create();
     can_rx_task_create();
-    gc_tx_task_create();
-    gc_rx_task_create();
 }
 
 static void init_can_stack(void)

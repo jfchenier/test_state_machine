@@ -1,5 +1,5 @@
 #include "os.h"
-#include "stm32f1xx_hal.h"
+#include "stm32f4xx_hal.h"
 #include "can_sig.h"
 #include "can_msg.h"
 #include "can_bus.h"

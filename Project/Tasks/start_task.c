@@ -1,7 +1,7 @@
 #include "os.h"
 #include "stm32f4xx_hal.h"
 #include "app_cfg.h"
-//#include "init.h"
+#include "init.h"
 
 static  OS_TCB  StartTaskTCB;
 static  CPU_STK StartTaskStk[APP_CFG_START_TASK_STK_SIZE];
@@ -18,7 +18,7 @@ static void StartTask(void *p_arg)
 
   OS_CPU_SysTickInit(cnts);                                   /* Init uC/OS periodic time src (SysTick).              */
 
-  //Init_Board();
+  Init_Board();
 
   while (1) {
     HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);

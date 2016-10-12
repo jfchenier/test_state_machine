@@ -179,10 +179,10 @@ g_pfnVectors:
   .word     DMA1_Stream5_IRQHandler           /* DMA1 Stream 5                */                   
   .word     DMA1_Stream6_IRQHandler           /* DMA1 Stream 6                */                   
   .word     ADC_IRQHandler                    /* ADC1, ADC2 and ADC3s         */                   
-  .word     CAN1_TX_IRQHandler                /* CAN1 TX                      */                         
-  .word     CAN1_RX0_IRQHandler               /* CAN1 RX0                     */                          
-  .word     CAN1_RX1_IRQHandler               /* CAN1 RX1                     */                          
-  .word     CAN1_SCE_IRQHandler               /* CAN1 SCE                     */                          
+  .word     STM32F4XXCAN_CAN1_TX_IRQHandler   /* From uC/CAN                  */
+  .word     STM32F4XXCAN_CAN1_RX0_IRQHandler  /* From uC/CAN                  */
+  .word     STM32F4XXCAN_CAN1_RX1_IRQHandler  /* From uC/CAN                  */
+  .word     STM32F4XXCAN_CAN1_SCE_IRQHandler  /* From uC/CAN                  */
   .word     EXTI9_5_IRQHandler                /* External Line[9:5]s          */                          
   .word     TIM1_BRK_TIM9_IRQHandler          /* TIM1 Break and TIM9          */         
   .word     TIM1_UP_TIM10_IRQHandler          /* TIM1 Update and TIM10        */         
@@ -223,10 +223,10 @@ g_pfnVectors:
   .word     DMA2_Stream4_IRQHandler           /* DMA2 Stream 4                */                   
   .word     0                                 /* Reserved                     */                   
   .word     0                                 /* Reserved                     */                     
-  .word     CAN2_TX_IRQHandler                /* CAN2 TX                      */                          
-  .word     CAN2_RX0_IRQHandler               /* CAN2 RX0                     */                          
-  .word     CAN2_RX1_IRQHandler               /* CAN2 RX1                     */                          
-  .word     CAN2_SCE_IRQHandler               /* CAN2 SCE                     */                          
+  .word     STM32F4XXCAN_CAN2_TX_IRQHandler   /* From uC/CAN                  */
+  .word     STM32F4XXCAN_CAN2_RX0_IRQHandler  /* From uC/CAN                  */
+  .word     STM32F4XXCAN_CAN2_RX1_IRQHandler  /* From uC/CAN                  */
+  .word     STM32F4XXCAN_CAN2_SCE_IRQHandler  /* From uC/CAN                  */
   .word     OTG_FS_IRQHandler                 /* USB OTG FS                   */                   
   .word     DMA2_Stream5_IRQHandler           /* DMA2 Stream 5                */                   
   .word     DMA2_Stream6_IRQHandler           /* DMA2 Stream 6                */                   

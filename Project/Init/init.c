@@ -30,7 +30,7 @@ static void init_services(void)
 
 static void init_tasks(void)
 {
-    can_tx_task_create();
+    //can_tx_task_create();
     can_rx_task_create();
 }
 

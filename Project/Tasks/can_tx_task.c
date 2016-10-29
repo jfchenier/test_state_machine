@@ -15,12 +15,15 @@ static void can_tx_task(void *p_arg)
     OS_ERR      err;
     CANFRM      frm;
     CPU_INT16S  msg;
+    CPU_INT16U  counter = 0;
 
    (void)p_arg;
 
     while (DEF_ON) {
         for(int index = 0; index < CANMSG_N; index++) {
-            msg = CanMsgOpen(0, 0x200L + index, 0);
+            CanSigWrite(0, &counter, 2);
+            counter++;
+            msg = CanMsgOpen(0, 0x400L + index, 0);
             if (msg >= 0) {
                 CanMsgRead(msg, (void *)&frm, sizeof(CANFRM));
                 CanBusWrite(0, (void *)&frm, sizeof(CANFRM));

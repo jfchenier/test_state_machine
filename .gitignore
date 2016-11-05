@@ -89,3 +89,4 @@ Debug/
 # Debug files
 *.dSYM/
 *.su
+/Eclipse/

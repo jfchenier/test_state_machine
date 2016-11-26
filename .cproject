@@ -36,9 +36,9 @@
 								<option id="gnu.c.compiler.option.include.paths.201774325" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../Common/ESCT/MemStruct"/>
 									<listOptionValue builtIn="false" value="../Project"/>
+									<listOptionValue builtIn="false" value="../Project/Services"/>
 									<listOptionValue builtIn="false" value="../Project/Tasks"/>
 									<listOptionValue builtIn="false" value="../Project/Init"/>
-									<listOptionValue builtIn="false" value="../Common/ESCT/Services"/>
 									<listOptionValue builtIn="false" value="../Common/ESCT/Utils"/>
 									<listOptionValue builtIn="false" value="../Inc"/>
 									<listOptionValue builtIn="false" value="../Drivers/STM32F4xx_HAL_Driver/Inc"/>
@@ -61,6 +61,7 @@
 									<listOptionValue builtIn="false" value="../Common/Micrium/uC-CAN/Port/Driver"/>
 									<listOptionValue builtIn="false" value="../Common/Micrium/uC-CAN/Port/Driver/STM32F4XX"/>
 									<listOptionValue builtIn="false" value="../Common/Micrium/uC-OS-III/Port/ARM-Cortex-M4/Generic/GNU"/>
+									<listOptionValue builtIn="false" value="../Common/ESCT/Libs"/>
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.def.symbols.464376567" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__weak=&quot;__attribute__((weak))&quot;"/>
@@ -106,16 +107,24 @@
 							<option id="fr.ac6.managedbuild.option.gnu.cross.instructionSet.1526307057.287707479" name="Instruction Set" superClass="fr.ac6.managedbuild.option.gnu.cross.instructionSet.1526307057"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.1739575846.1186455353" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu.1739575846"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.168717775.1148700642" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi.168717775"/>
-							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.899488178" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1730041680"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.899488178" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1730041680">
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1013576167" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.809152653" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.1399997419" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.1892991669"/>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.1783724602" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.297332432"/>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.534798689" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.242109399"/>
 							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.688544473" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver.485670651"/>
-							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.232386961" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.54137745"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.232386961" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.54137745">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1190539000" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.122704903" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.745580508.797963390" name="lib_timer.h" rcbsApplicability="disable" resourcePath="Common/ESCT/Libs/lib_timer.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="Project/Customs|Drivers|Inc|Src|Common/ESCT/Services/service_uart.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Common/ESCT/Libs/lib_timer.h|Common/ESCT/Libs/lib_timer.c|Project/Customs|Drivers|Inc|Src|Common/ESCT/Services/service_uart.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry excluding="Common/ESCT/Services/service_uart.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 						<entry excluding="Common/ESCT/Services/service_uart.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
 						<entry excluding="Common/ESCT/Services/service_uart.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
@@ -139,8 +148,8 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
-		<configuration artifactName="Template-STM32F446" configurationName="Debug">
-			<resource resourceType="PROJECT" workspacePath="Template-STM32F446"/>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/Template-STM32F446"/>
 		</configuration>
 	</storageModule>
 </cproject>

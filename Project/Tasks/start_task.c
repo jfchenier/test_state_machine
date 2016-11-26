@@ -2,6 +2,7 @@
 #include "stm32f4xx_hal.h"
 #include "app_cfg.h"
 #include "init.h"
+#include "memstruct.h"
 
 static  OS_TCB  StartTaskTCB;
 static  CPU_STK StartTaskStk[APP_CFG_START_TASK_STK_SIZE];
@@ -21,8 +22,12 @@ static void StartTask(void *p_arg)
   Init_Board();
 
   while (1) {
-    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-    OSTimeDlyHMSM(0, 0, 0, 500, OS_OPT_TIME_HMSM_STRICT, &err);
+        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+
+        uint32_t osTime = OSTimeGet(&err);
+        CanSigWrite(S_TEMPLATE_OSTICK, &osTime, sizeof(osTime));
+
+        OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &err);
   }
 }
 

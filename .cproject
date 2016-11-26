@@ -122,9 +122,10 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.745580508.1832994536" name="lib_uart.h" rcbsApplicability="disable" resourcePath="Common/ESCT/Libs/lib_uart.h" toolsToInvoke=""/>
 					<fileInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.745580508.797963390" name="lib_timer.h" rcbsApplicability="disable" resourcePath="Common/ESCT/Libs/lib_timer.h" toolsToInvoke=""/>
 					<sourceEntries>
-						<entry excluding="Common/ESCT/Libs/lib_timer.h|Common/ESCT/Libs/lib_timer.c|Project/Customs|Drivers|Inc|Src|Common/ESCT/Services/service_uart.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Common/ESCT/Libs/lib_uart.h|Common/ESCT/Libs/lib_uart.c|Common/ESCT/Libs/lib_timer.h|Common/ESCT/Libs/lib_timer.c|Project/Customs|Drivers|Inc|Src|Common/ESCT/Services/service_uart.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 						<entry excluding="Common/ESCT/Services/service_uart.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
 						<entry excluding="Common/ESCT/Services/service_uart.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
 						<entry excluding="Common/ESCT/Services/service_uart.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>

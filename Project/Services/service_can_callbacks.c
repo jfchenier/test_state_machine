@@ -6,8 +6,8 @@
  * Filename    : service_can_callbacks.c
  * Author      : Jean-Francois Chenier
  * Description : CAN callback function declaration
- * note        : You can declare CAN callback functions here or in Task
- *               files if they are closely related
+ * Note        : You can declare CAN callback functions here or in task
+ *               files if it is closely related
  *
  *********************************************************************************************************
  * COPYRIGHT(c) 2016, Eclipse Solar Car
@@ -35,6 +35,12 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
+ *********************************************************************************************************
+ */
+
+/*
+ *********************************************************************************************************
+ *                                               INCLUDES
  *********************************************************************************************************
  */
 #include "stm32f4xx_hal.h"
@@ -66,10 +72,10 @@
  */
 void template_led_callback(void* arg, CANSIG_VAL_T* value, CPU_INT32U CallbackId)
 {
-    UNUSED (&value);
-    UNUSED (&arg);
+    UNUSED(&value);
+    UNUSED(&arg);
 
-    if (CallbackId == CANSIG_CALLBACK_WRITE_ID){
+    if (CallbackId == CANSIG_CALLBACK_WRITE_ID) {
         HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
     }
 }

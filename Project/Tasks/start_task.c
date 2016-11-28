@@ -92,11 +92,10 @@ static void StartTask(void *p_arg)
     Init_Board();
 
     while (1) {
-        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-
         uint32_t osTime = OSTimeGet(&err);
-        CanSigWrite(S_TEMPLATE_OSTICK, &osTime, sizeof(osTime));
 
+        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+        CanSigWrite(S_TEMPLATE_OSTICK, &osTime, sizeof(osTime));
         OSTimeDlyHMSM(0, 0, 0, 100, OS_OPT_TIME_HMSM_STRICT, &err);
     }
 }

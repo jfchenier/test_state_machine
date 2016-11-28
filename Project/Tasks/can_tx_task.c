@@ -51,6 +51,7 @@
 #include "app_cfg.h"
 
 #include "memstruct.h"
+#include "can_rx_task.h"
 
 /*
  *********************************************************************************************************
@@ -89,11 +90,9 @@ static void can_tx_task(void *p_arg)
     (void)p_arg;
 
     while (DEF_ON) {
-        for (int i = 0; i < M_MAX_TEMPLATE; i++)
-                {
+        for (int i = 0; i < M_MAX_TEMPLATE; i++) {
             msg = CanMsgOpen(0, ID_OFFSET_TEMPLATE + i, 0);
-            if (msg >= 0)
-                    {
+            if (msg >= 0) {
                 CanMsgRead(msg, &frm, sizeof(CANFRM));
                 CanBusWrite(0, &frm, sizeof(CANFRM));
             }

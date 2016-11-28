@@ -59,5 +59,6 @@
  *********************************************************************************************************
  */
 void template_led_callback(void* arg, CANSIG_VAL_T* value, CPU_INT32U CallbackId);
+OS_FLAG_GRP get_flasher_flag_grp(void);
 
 #endif

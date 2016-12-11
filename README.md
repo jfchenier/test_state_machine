@@ -7,3 +7,5 @@
 [Coding style](https://eclipseets.ca/wiki/Coding_style)
 
 [Architecture du projet](https://eclipseets.ca/wiki/Architecture_de_projet_STM32)
+
+[Références](https://eclipseets.ca/wiki/R%C3%A9f%C3%A9rences)

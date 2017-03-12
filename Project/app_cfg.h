@@ -31,6 +31,7 @@
 #define  APP_CFG_START_TASK_PRIO                2u
 #define  APP_CFG_CAN_RX_TASK_PRIO               3u
 #define  APP_CFG_CAN_TX_TASK_PRIO               4u
+#define  APP_CFG_STATE_MACHINE_TASK_PRIO        5u
 
 
 /*
@@ -43,6 +44,7 @@
 #define  APP_CFG_START_TASK_STK_SIZE            256u
 #define  APP_CFG_CAN_RX_TASK_STK_SIZE           256u
 #define  APP_CFG_CAN_TX_TASK_STK_SIZE           256u
+#define  APP_CFG_STATE_MACHINE_TASK_STK_SIZE    256u
 
 
 /*

@@ -3,9 +3,9 @@
  *                                 COPYRIGHT(c) 2016 ECLIPSE SOLAR CAR
  *********************************************************************************************************
  *
- * Filename    : init.c
- * Author      : Olivier C. Larocque
- * Description : Board initialisation
+ * Filename    : state_machine_rx_task.c
+ * Author      : Jean-François Chenier
+ * Description : main state machine loop
  *
  *********************************************************************************************************
  * COPYRIGHT(c) 2016, Eclipse Solar Car
@@ -41,6 +41,9 @@
  *                                               INCLUDES
  *********************************************************************************************************
  */
+#include "stm32f4xx_hal.h"
+
+#include "os.h"
 #include "can_sig.h"
 #include "can_msg.h"
 #include "can_bus.h"
@@ -48,46 +51,27 @@
 #include "app_cfg.h"
 
 #include "memstruct.h"
-#include "can_tx_task.h"
 #include "can_rx_task.h"
 
 /*
  *********************************************************************************************************
- *                                            GLOBAL DATA
+ *                                            LOCAL DATA
  *********************************************************************************************************
  */
-extern const CANBUS_PARA CanCfg;
-extern const CANMSG_PARA CanMsg[];
-#if (CANSIG_STATIC_CONFIG == 0u)
-extern const CANSIG_PARA CanSig[];
-#endif
+static OS_TCB stateMachineTaskTCB;
+static CPU_STK stateMachineTaskStk[APP_CFG_STATE_MACHINE_TASK_STK_SIZE];
 
-/*
- *********************************************************************************************************
- *                                         FUNCTION PROTOTYPES
- *********************************************************************************************************
- */
-static void init_services(void);
-static void init_tasks(void);
-static void init_can_stack(void);
-
-/*
- *********************************************************************************************************
- * Init_Board
- *
- * Description : Board initialisation
- *
- * Argument(s) : none
- *
- * Return(s)   : none
- *********************************************************************************************************
- */
-void Init_Board(void)
+struct state
 {
-    init_services();
-    init_tasks();
-    //init_can_stack();
-}
+    void (*next)(struct state *state);
+    void *arg;
+};
+
+void state_1(struct state *state);
+void state_2(struct state *state);
+void state_3(struct state *state);
+void state_4(struct state *state);
+void state_5(struct state *state);
 
 /*
  *********************************************************************************************************
@@ -97,83 +81,121 @@ void Init_Board(void)
 
 /*
  *********************************************************************************************************
- * init_services
+ * state_machine_task
  *
- * Description : Services initialisation
+ * Description : Main loop for state machine.
  *
- * Argument(s) : none
+ * Argument(s) : p_arg     Unused
  *
- * Return(s)   : none
+ * Return(s)   : none.
  *********************************************************************************************************
  */
-static void init_services(void)
+static void state_machine_task(void *p_arg)
 {
+    struct state state = { state_1, 0 };
+
+    while(state.next){
+        state.next(&state);
+    }
+}
+
+void state_1(struct state *state)
+{
+    OS_ERR err;
+
+    printf("this is the state 1\n\r");
+    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+
+    if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET)
+    	state->next = state_5;
+    else
+    	state->next = state_2;
+}
+
+void state_2(struct state *state)
+{
+    OS_ERR err;
+
+    printf("this is the state 2\n\r");
+    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+
+    if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET)
+    	state->next = state_1;
+    else
+    	state->next = state_3;
+}
+
+void state_3(struct state *state)
+{
+    OS_ERR err;
+
+    printf("this is the state 3\n\r");
+    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+
+    if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET)
+    	state->next = state_2;
+    else
+    	state->next = state_4;
+}
+
+void state_4(struct state *state)
+{
+    OS_ERR err;
+
+    printf("this is the state 4\n\r");
+    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+
+    if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET)
+    	state->next = state_3;
+    else
+    	state->next = state_5;
+}
+
+void state_5(struct state *state)
+{
+    OS_ERR err;
+
+    printf("this is the state 5\n\r");
+    OSTimeDlyHMSM(0, 0, 1, 0, OS_OPT_TIME_HMSM_STRICT, &err);
+
+    if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == GPIO_PIN_RESET)
+    	state->next = state_4;
+    else
+    	state->next = state_1;
 }
 
 /*
  *********************************************************************************************************
- * init_tasks
- *
- * Description : Tasks initialisation
- *
- * Argument(s) : none
- *
- * Return(s)   : none
+ *                                         PUBLIC FUNCTIONS
  *********************************************************************************************************
  */
-static void init_tasks(void)
-{
-    //can_tx_task_create();
-    //can_rx_task_create();
-	state_machine_task_create();
-}
 
 /*
  *********************************************************************************************************
- * init_can_stack
+ * state_machine_task_create
  *
- * Description : Can stack initialisation
+ * Description : create state machine task
  *
  * Argument(s) : none
  *
- * Return(s)   : none
+ * Return(s)   : none.
  *********************************************************************************************************
  */
-static void init_can_stack(void)
+void state_machine_task_create(void)
 {
-    CPU_INT16S can_err;
-    CANMSG_PARA *m;
-#if (CANSIG_STATIC_CONFIG == 0u)
-    CANSIG_PARA *s;
-#endif
+    OS_ERR err;
 
-    CanSigInit(0L); /* Initialize CAN Signals.*/
-#if (CANSIG_STATIC_CONFIG == 0u)
-    s = CanSig;
-    while (s < &CanSig[S_MAX]) { /* Create CAN Signals*/
-        can_err = CanSigCreate(s);
-        if (can_err < 0) {
-            while (1); /* Failure Handling Here.*/
-        }
-        s++;
-    }
-#endif
-
-    CanMsgInit(0L); /* Initialize CAN Messages.*/
-    m = (CANMSG_PARA *)CanMsg;
-    while (m < &CanMsg[CANMSG_N]) { /* Create CAN Messages.*/
-        can_err = CanMsgCreate(m);
-        if (can_err < 0) {
-            while (1)
-                ; /* Failure Handling Here.*/
-        }
-        m++;
-    }
-
-    CanBusInit(0L); /* Initialize CAN Objects & Bus Layer.*/
-    can_err = CanBusEnable((CANBUS_PARA *)&CanCfg); /* Enable CAN Device according to Configuration.*/
-    if (can_err != CAN_ERR_NONE) {
-        while (1)
-            ; /* Failure Handling Here.                               */
-    }
+    OSTaskCreate((OS_TCB *)&stateMachineTaskTCB,
+            (CPU_CHAR *)"state machine task",
+            (OS_TASK_PTR)state_machine_task,
+            (void *)0,
+            (OS_PRIO)APP_CFG_STATE_MACHINE_TASK_PRIO,
+            (CPU_STK *)&stateMachineTaskStk[0],
+            (CPU_STK_SIZE)stateMachineTaskStk[APP_CFG_STATE_MACHINE_TASK_STK_SIZE / 10],
+            (CPU_STK_SIZE)APP_CFG_STATE_MACHINE_TASK_STK_SIZE,
+            (OS_MSG_QTY)0,
+            (OS_TICK)0,
+            (void *)0,
+            (OS_OPT)(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR ),
+            (OS_ERR *)&err);
 }

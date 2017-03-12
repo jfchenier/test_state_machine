@@ -54,7 +54,11 @@
 #include "can_rx_task.h"
 
 enum {
-	STATE_1 = 1, STATE_2, STATE_3, STATE_4, STATE_5
+	STATE_1 = 1,
+	STATE_2,
+	STATE_3,
+	STATE_4,
+	STATE_5
 };
 
 /*
